@@ -107,17 +107,17 @@ THREE.OrbitControls = function (object, domElement) {
 
 	// this method is exposed, but perhaps it would be better if we can make it private...
 	this.update = function () {
-		const offset = new THREE.Vector3();
+		let offset = new THREE.Vector3();
 
 		// so camera.up is the orbit axis
-		const quat = new THREE.Quaternion().setFromUnitVectors(object.up, new THREE.Vector3(0, 1, 0));
-		const quatInverse = quat.clone().invert();
+		let quat = new THREE.Quaternion().setFromUnitVectors(object.up, new THREE.Vector3(0, 1, 0));
+		let quatInverse = quat.clone().invert();
 
-		const lastPosition = new THREE.Vector3();
-		const lastQuaternion = new THREE.Quaternion();
+		let lastPosition = new THREE.Vector3();
+		let lastQuaternion = new THREE.Quaternion();
 
 		return function update() {
-			const position = scope.object.position;
+			let position = scope.object.position;
 
 			offset.copy(position).sub(scope.target);
 
@@ -218,7 +218,7 @@ THREE.OrbitControls = function (object, domElement) {
 	let startEvent = { type: 'start' };
 	let endEvent = { type: 'end' };
 
-	const STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY: 4, TOUCH_PAN: 5 };
+	let STATE = { NONE: - 1, ROTATE: 0, DOLLY: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_DOLLY: 4, TOUCH_PAN: 5 };
 
 	let state = STATE.NONE;
 
@@ -260,8 +260,8 @@ THREE.OrbitControls = function (object, domElement) {
 		sphericalDelta.phi -= angle;
 	}
 
-	const panLeft = function () {
-		const v = new THREE.Vector3();
+	let panLeft = function () {
+		let v = new THREE.Vector3();
 
 		return function panLeft(distance, objectMatrix) {
 			v.setFromMatrixColumn(objectMatrix, 0); // get X column of objectMatrix
@@ -271,8 +271,8 @@ THREE.OrbitControls = function (object, domElement) {
 		};
 	}();
 
-	const panUp = function () {
-		const v = new THREE.Vector3();
+	let panUp = function () {
+		let v = new THREE.Vector3();
 
 		return function panUp(distance, objectMatrix) {
 			v.setFromMatrixColumn(objectMatrix, 1); // get Y column of objectMatrix
@@ -283,17 +283,17 @@ THREE.OrbitControls = function (object, domElement) {
 	}();
 
 	// deltaX and deltaY are in pixels; right and down are positive
-	const pan = function () {
-		const offset = new THREE.Vector3();
+	let pan = function () {
+		let offset = new THREE.Vector3();
 
 		return function pan(deltaX, deltaY) {
-			const element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+			let element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 			if (scope.object instanceof THREE.PerspectiveCamera) {
 				// perspective
-				const position = scope.object.position;
+				let position = scope.object.position;
 				offset.copy(position).sub(scope.target);
-				const targetDistance = offset.length();
+				let targetDistance = offset.length();
 
 				// half of the fov is center to top of screen
 				targetDistance *= Math.tan((scope.object.fov / 2) * Math.PI / 180.0);
@@ -359,7 +359,7 @@ THREE.OrbitControls = function (object, domElement) {
 		rotateEnd.set(event.clientX, event.clientY);
 		rotateDelta.subVectors(rotateEnd, rotateStart);
 
-		const element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+		let element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 		// rotating across whole screen goes 360 degrees around
 		rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed);
@@ -441,10 +441,10 @@ THREE.OrbitControls = function (object, domElement) {
 	}
 
 	function handleTouchStartDolly(event) {
-		const dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-		const dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
+		let dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
+		let dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
 
-		const distance = Math.sqrt(dx * dx + dy * dy);
+		let distance = Math.sqrt(dx * dx + dy * dy);
 
 		dollyStart.set(0, distance);
 	}
@@ -457,7 +457,7 @@ THREE.OrbitControls = function (object, domElement) {
 		rotateEnd.set(event.touches[ 0 ].pageX, event.touches[ 0 ].pageY);
 		rotateDelta.subVectors(rotateEnd, rotateStart);
 
-		const element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+		let element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
 		// rotating across whole screen goes 360 degrees around
 		rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed);
@@ -471,10 +471,10 @@ THREE.OrbitControls = function (object, domElement) {
 	}
 
 	function handleTouchMoveDolly(event) {
-		const dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-		const dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
+		let dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
+		let dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
 
-		const distance = Math.sqrt(dx * dx + dy * dy);
+		let distance = Math.sqrt(dx * dx + dy * dy);
 
 		dollyEnd.set(0, distance);
 		dollyDelta.subVectors(dollyEnd, dollyStart);
@@ -834,11 +834,11 @@ let autoRotate = false;
 let skyboxImage = 'skybox';
 
 function createPathStrings(filename) {
-  const basePath = `./assets/`;
-  const baseFilename = basePath + filename;
-  const fileType = '.png';
-  const sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf'];
-  const pathStings = sides.map(side => {
+  let basePath = `./assets/`;
+  let baseFilename = basePath + filename;
+  let fileType = '.png';
+  let sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf'];
+  let pathStings = sides.map(side => {
     return baseFilename + '_' + side + fileType;
   });
 
@@ -846,8 +846,8 @@ function createPathStrings(filename) {
 }
 
 function createMaterialArray(filename) {
-  const skyboxImagepaths = createPathStrings(filename);
-  const materialArray = skyboxImagepaths.map(image => {
+  let skyboxImagepaths = createPathStrings(filename);
+  let materialArray = skyboxImagepaths.map(image => {
     let texture = new THREE.TextureLoader().load(image);
 
     return new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
@@ -871,7 +871,7 @@ function init() {
   renderer.domElement.id = 'canvas';
   document.body.appendChild(renderer.domElement);
 
-  const materialArray = createMaterialArray(skyboxImage);
+  let materialArray = createMaterialArray(skyboxImage);
 
   skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
   skybox = new THREE.Mesh(skyboxGeo, materialArray);
@@ -917,7 +917,7 @@ init();
 function switchSkyBox(skyboxName) {
   scene.remove(skybox);
   skyboxImage = skyboxName;
-  const materialArray = createMaterialArray(skyboxImage);
+  let materialArray = createMaterialArray(skyboxImage);
 
   skybox = new THREE.Mesh(skyboxGeo, materialArray);
   scene.add(skybox);
@@ -932,7 +932,7 @@ function toggleZoom(value) {
   loading.style.display = value ? 'none' : 'show';
 }
 
-const autoRotateBtn = document.getElementById('autoRotate');
-const loading = document.getElementById('loading');
+let autoRotateBtn = document.getElementById('autoRotate');
+let loading = document.getElementById('loading');
 
 autoRotateBtn.addEventListener('click', () => toggleAutoRotate(!autoRotate))

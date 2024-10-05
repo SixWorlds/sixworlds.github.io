@@ -1,5 +1,11 @@
+# Author: Adam Kuziemski (https://github.com/AdamKuziemski)
+# This script generates a JSON file based on data from
+# https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS
+# That JSON file will power the Exosky app to create menus and serve as a base for new star position calculations
+import math
+
 import csv
-import math 
+import json
 
 with open('./assets/exoplanets.csv') as planets_file:
     planet_reader = csv.DictReader(
@@ -35,4 +41,5 @@ with open('./assets/exoplanets.csv') as planets_file:
             "z_earth": z_earth
         }
 
-    print(planets)
+    with open("assets/planets.json", "w") as outfile: 
+        json.dump(planets, outfile)

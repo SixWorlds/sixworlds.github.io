@@ -27,11 +27,11 @@ with open('./assets/exoplanets.csv') as planets_file:
 
         # calculate positions relative to earth, assuming earth is (0, 0, 0)
         # not accounting for earth orbiting the sun
-        x_earth = dist * math.cos(ra)
-        y_earth = dist * math.sin(ra) * -1
+        x_earth = dist * math.cos(ra) * math.cos(dec)
+        y_earth = dist * math.sin(ra) * math.cos(dec)
         z_earth = dist * math.sin(dec)
 
-        # add planet to "db"
+        # add planet to json file
         planets[planet.get('pl_name')] = {
             "dec": dec,
             "dist": dist,

@@ -1,3 +1,7 @@
+# Author: Adam Kuziemski (https://github.com/AdamKuziemski)
+# This script generates a JSON file based on Gaia data:
+# https://astroquery.readthedocs.io/en/latest/gaia/gaia.html
+# That JSON file will then be used to calculate star positions relative to exoplanets
 import astropy.units as u
 from astropy.coordinates import SkyCoord
 from astroquery.gaia import Gaia
@@ -16,25 +20,13 @@ job = Gaia.launch_job_async("SELECT TOP 10000 distance_gspphot,phot_g_mean_mag,r
 
 r = job.get_results()
 stars = []
-# tables = Gaia.load_tables()
-
-# for table in tables:
-#   print(table.get_qualified_name())
 
 for row in r:
-    # ra = float(row.get('ra'))
-    # dec = float(row.get('dec'))
-    # lat = row.get('ecl_lat')
-    # lon = row.get('ecl_lon')
-    # mag = row.get('phot_g_mean_mag'),
-    # dist = float(row.get('dist'))
-    # parallax = float(row.get('parallax'))
-    # print("{}, {}, {}".format(r, g,b))
-    # read relevant planet information
-
+    # skip stars with no distance, as they are useless for calculations
     if row.get('distance_gspphot') == '--':
         continue
 
+    # read relevant star information
     dist = float(row.get('distance_gspphot'))
     dec = float(row.get('dec'))
     ra = float(row.get('ra'))
@@ -42,11 +34,11 @@ for row in r:
 
     # calculate positions relative to earth, assuming earth is (0, 0, 0)
     # not accounting for earth orbiting the sun
-    x_earth = dist * math.cos(ra)
-    y_earth = dist * math.sin(ra) * -1
+    x_earth = dist * math.cos(ra) * math.cos(dec)
+    y_earth = dist * math.sin(ra) * math.cos(dec)
     z_earth = dist * math.sin(dec)
 
-    # add row to "db"
+    # add row to json file
     stars.append({
         "dec": dec,
         "dist": dist,

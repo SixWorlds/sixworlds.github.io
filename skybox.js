@@ -1020,8 +1020,8 @@ let zoomOut = false;
 let autoRotate = true;
 let skyboxImage = 'skybox';
 
-function createPathStrings(filename) {
-  const basePath = `./assets/`;
+function createPathStrings(folder, filename) {
+  const basePath = `./assets/${folder}`;
   const baseFilename = basePath + filename;
   const sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf'];
   const pathStings = sides.map(side => {
@@ -1031,8 +1031,8 @@ function createPathStrings(filename) {
   return pathStings;
 }
 
-function createMaterialArray(filename) {
-  const skyboxImagepaths = createPathStrings(filename);
+function createMaterialArray(folder, filename) {
+  const skyboxImagepaths = createPathStrings(folder, filename);
   const materialArray = skyboxImagepaths.map(image => {
     let texture = new THREE.TextureLoader().load(image);
 
@@ -1104,7 +1104,7 @@ init();
 function switchSkyBox (skyboxName) {
   scene.remove(skybox);
   skyboxImage = skyboxName;
-  const materialArray = createMaterialArray(skyboxImage);
+  const materialArray = createMaterialArray(skyboxName, skyboxImage);
 
   skybox = new THREE.Mesh(skyboxGeo, materialArray);
   scene.add(skybox);

@@ -20,7 +20,7 @@ async function loadPlanets() {
 
 planetPicker.addEventListener('change', (e) => {
   const selectedPlanet = e.target.value;
-  console.log('look I changed', planets[selectedPlanet]);
+  switchSkyBox(selectedPlanet, 'skybox');
 });
 
 loadPlanets().then();

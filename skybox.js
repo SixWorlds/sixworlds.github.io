@@ -1103,8 +1103,7 @@ init();
 
 function switchSkyBox (skyboxName) {
   scene.remove(skybox);
-  skyboxImage = skyboxName;
-  const materialArray = createMaterialArray(skyboxName, skyboxImage);
+  const materialArray = createMaterialArray(skyboxName, 'skybox');
 
   skybox = new THREE.Mesh(skyboxGeo, materialArray);
   scene.add(skybox);

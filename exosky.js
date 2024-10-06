@@ -28,11 +28,11 @@ planetPicker.addEventListener('change', (e) => {
   switchSkyBox(selectedPlanet, 'skybox');
 });
 
-document.getElementById('skymap-n', () => {
+document.getElementById('skymap-n').addEventListener('click', () => {
   window.open(`https://sixworlds.github.io/assets/${currentPlanet}/skymap_n.png`, 'blank');
 });
 
-document.getElementById('skymap-s', () => {
+document.getElementById('skymap-s').addEventListener('click', () => {
   window.open(`https://sixworlds.github.io/assets/${currentPlanet}/skymap_s.png`, 'blank');
 });
 

@@ -15,7 +15,9 @@ async function loadPlanets() {
       planetPicker.appendChild(option);
     });
   
+  switchSkyBox(Object.keys(planets)[0], 'skybox');
   loading.style.display = 'none';
+  document.getElementById('drag').style.display = 'block';
 }
 
 planetPicker.addEventListener('change', (e) => {

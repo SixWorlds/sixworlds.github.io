@@ -651,6 +651,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	function onMouseDown( event ) {
 
 		if ( scope.enabled === false ) return;
+		document.getElementById('drag').style.display = 'none';
 
 		event.preventDefault();
 
@@ -1046,14 +1047,14 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(
     55,
-    window.innerWidth / window.innerHeight,
+    (window.innerWidth - 20) / (window.innerHeight - 20),
     45,
     30000,
   );
   camera.position.set(1200, -250, 2000);
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth - 20, window.innerHeight - 20);
   renderer.domElement.id = 'canvas';
   document.body.appendChild(renderer.domElement);
 
@@ -1075,6 +1076,7 @@ function init() {
   window.addEventListener('resize', onWindowResize, false);
   animate();
 }
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
 

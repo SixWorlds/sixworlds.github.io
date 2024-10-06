@@ -1,26 +1,44 @@
+:root {
+  --background: #222222;
+  --text-color: #f8f8f8;
+  --line-color: #666666;
+  --hint-color: #aaaaaa;
+  --element-background: #474747;
+  --hover-background: #525252;
+}
+
 body {
   font-size: 16px;
+  background: var(--background);
+  color: var(--text-color);
+}
+
+canvas {
+  border: 1px solid var(--line-color);
 }
 
 .drag {
-  padding: 16px auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -173.4px;
 }
 
 .controls {
   position: fixed;
-  top: 40px;
-  right: 20px;
+  top: 20px;
+  right: 25px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #444;
+  border: 1px solid var(--line-color);
   min-width: 160px;
 }
 
 .controls label {
-  color: #ddd;
+  color: var(--text-color);
   text-transform: uppercase;
   opacity: .5;
-  margin-bottom: 6px
+  margin-bottom: 6px;
 }
 
 .controls button,
@@ -29,23 +47,30 @@ body {
   width: 120px;
   font-size: 14px;
   outline: none;
-  background: #333;
-  color: #ddd;
+  background: var(--element-background);
+  color: var(--text-color);
   border: none;
   text-transform: uppercase;
-  opacity: .5;
+  opacity: .7;
 }
 
 .spacer {
   height: 40px;
 }
 
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -65px;
+  margin-left: -255px;
+  text-align: center;
+}
+
 button:hover {
-  background: #222;
-  color: #eee;
+  background: var(--hover-background);
 }
 
 button:active {
-  background: #111;
-  color: #fff;
+  background: var(--hover-background);
 }

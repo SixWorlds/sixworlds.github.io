@@ -9,16 +9,17 @@
 	<title>Exosky!</title>
 </head>
 <body>
-	<div id="loading">
+	<div id="loading" class="loading">
   	<h1>Welcome to Exosky!</h1>
 		<h2>Please wait while we load the planets.</h2>
 	</div>
-  <div class="drag">Click And drag the screen to move around.</div>
+  <div id="drag" class="drag" style="display: none">Click and drag the screen to move around.</div>
 	<div class="controls">
 		<label for="planet-picker">Pick a planet</label>
 		<select id="planet-picker"></select>
 		<div class="spacer"></div>
-		<button id="autoRotate">Auto Rotate</button>
+		<label>Options</label>
+		<button id="autoRotate" type="button">Auto Rotate</button>
 	</div>
 </body>
 <footer>

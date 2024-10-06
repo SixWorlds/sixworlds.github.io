@@ -3,7 +3,7 @@ const planetPicker = document.getElementById('planet-picker');
 let planets = null;
 
 async function loadPlanets() {
-  const planetsResponse = await fetch('https://sixworlds.github.io/assets/planets.json');
+  const planetsResponse = await fetch('https://sixworlds.github.io/assets/planets_demo.json');
   planets = await planetsResponse.json();
   
   Object.keys(planets)

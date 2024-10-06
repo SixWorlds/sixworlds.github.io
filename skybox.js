@@ -1021,7 +1021,7 @@ let autoRotate = true;
 let skyboxImage = 'skybox';
 
 function createPathStrings(folder, filename) {
-  const basePath = `./assets/${folder}`;
+  const basePath = `./assets/${folder}/`;
   const baseFilename = basePath + filename;
   const sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf'];
   const pathStings = sides.map(side => {
